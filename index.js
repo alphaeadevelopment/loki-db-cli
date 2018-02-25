@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-module.exports = require('./dist/bundle.js').default;
+module.exports = require('./cli.js').default;
