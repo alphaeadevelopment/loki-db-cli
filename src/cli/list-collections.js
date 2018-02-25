@@ -1,27 +1,25 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import forEach from 'lodash/forEach';
-import { loadDatabase } from '../utils';
-import { closeDatabase } from '../utils';
+import { loadDatabase, closeDatabase } from '../utils';
 
-const builder = (yargs) => {
-}
+const builder = () => { };
 
-const handler = ({ name, filename }) => {
-  const db = new loki(filename);
+const handler = ({ filename }) => {
+  const db = new Loki(filename);
   try {
     loadDatabase(db)
       .then(() => {
         const colls = db.listCollections();
-        forEach(colls, c => console.log(c));
-        closeDatabase(db)
+        forEach(colls, c => console.log(c.name)); // eslint-disable-line no-console
+        closeDatabase(db);
       })
-      .catch(err => {
-        console.error(err);
+      .catch((err) => {
+        console.error(err); // eslint-disable-line no-console
         process.exit(1);
       });
   }
   catch (err) {
-    console.error(err);
+    console.error(err); // eslint-disable-line no-console
     process.exit(1);
   }
 };

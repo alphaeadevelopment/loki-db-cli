@@ -1,8 +1,7 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import merge from 'lodash/merge';
 import { collectionName } from './common-options';
-import { loadCollection } from '../utils';
-import { closeDatabase } from '../utils';
+import { loadCollection, closeDatabase } from '../utils';
 
 const builder = (yargs) => {
   yargs
@@ -18,26 +17,27 @@ const builder = (yargs) => {
 };
 
 const handler = ({ name, filename, query }) => {
-  const db = new loki(filename);
+  const db = new Loki(filename);
   loadCollection(db, name)
     .then((collection) => {
       let dbQuery;
       try {
         dbQuery = JSON.parse(query);
-      } catch (e) {
-        console.error('Error parsing JSON: %s', query);
+      }
+      catch (e) {
+        console.error('Error parsing JSON: %s', query); // eslint-disable-line no-console
         process.exit(1);
       }
       const data = collection.find(dbQuery);
-      if (data) console.log(JSON.stringify(data, null, 2));
+      if (data) console.log(JSON.stringify(data, null, 2)); // eslint-disable-line no-console
       closeDatabase(db)
         .then(() => null);
     })
-    .catch(err => {
-      console.error(err);
+    .catch((err) => {
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'query',

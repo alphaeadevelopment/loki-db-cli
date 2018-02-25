@@ -6,11 +6,11 @@ import insert from './insert';
 import findBy from './find-by';
 import query from './query';
 import findAndRemove from './find-and-remove';
+
 const yargs = require('yargs/yargs');
 
-// const args = process.argv.slice(2);
-
-const parser = yargs(process.argv.slice(2))
+// eslint-disable-next-line no-unused-expressions
+yargs(process.argv.slice(2))
   .command(listCollections)
   .command(addCollection)
   .command(removeCollection)
@@ -32,4 +32,3 @@ const parser = yargs(process.argv.slice(2))
   .strict()
   .help()
   .argv;
-// const argv = parser.parse(process.argv.slice(2));

@@ -1,21 +1,18 @@
-import loki from 'lokijs';
-import { loadCollection } from '../utils';
+import Loki from 'lokijs';
 import { closeDatabase, saveDatabase } from '../utils';
 
-const builder = (yargs) => {
-}
+const builder = () => { };
 
 const handler = ({ name, filename }) => {
-  const db = new loki(filename);
+  const db = new Loki(filename);
   db.removeCollection(name);
-  saveDatabase(db)
+  saveDatabase(db);
   closeDatabase(db)
-    .then(() => console.log('complete'))
-    .catch(err => {
-      console.error(err);
+    .catch((err) => {
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'removeCollection',

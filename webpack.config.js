@@ -24,7 +24,7 @@ var config = {
     extensions: ['.js', '.jsx'],
   },
   externals: {
-    'uuid/v1': 'uuid/v1',
+    'lokijs': 'lokijs',
   },
   plugins: [
   ],

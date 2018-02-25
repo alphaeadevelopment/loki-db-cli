@@ -1,8 +1,7 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import merge from 'lodash/merge';
 import { collectionName } from './common-options';
-import { loadCollection } from '../utils';
-import { closeDatabase, saveDatabase } from '../utils';
+import { loadCollection, closeDatabase, saveDatabase } from '../utils';
 
 const builder = (yargs) => {
   yargs
@@ -18,14 +17,15 @@ const builder = (yargs) => {
 };
 
 const handler = ({ name, filename, data }) => {
-  const db = new loki(filename);
+  const db = new Loki(filename);
   loadCollection(db, name)
     .then((collection) => {
       let item;
       try {
         item = JSON.parse(data);
-      } catch (e) {
-        console.error('Error parsing JSON: %s', data);
+      }
+      catch (e) {
+        console.error('Error parsing JSON: %s', data); // eslint-disable-line no-console
         process.exit(1);
       }
       collection.insert(item);
@@ -33,13 +33,13 @@ const handler = ({ name, filename, data }) => {
         .then(() => {
           closeDatabase(db)
             .then(() => null);
-        })
+        });
     })
-    .catch(err => {
-      console.error(err);
+    .catch((err) => {
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'insert',

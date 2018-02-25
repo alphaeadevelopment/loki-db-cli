@@ -1,7 +1,8 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import merge from 'lodash/merge';
 import { collectionName } from './common-options';
 import { closeDatabase, saveDatabase } from '../utils';
+
 const builder = (yargs) => {
   yargs
     .options(
@@ -13,21 +14,21 @@ const builder = (yargs) => {
           demandOption: true,
         },
       }));
-}
+};
 
 const handler = ({ name, filename, unique }) => {
-  const db = new loki(filename);
-  var collection = db.addCollection(name, { unique });
+  const db = new Loki(filename);
+  db.addCollection(name, { unique });
   saveDatabase(db)
     .then(() => {
       closeDatabase(db)
         .then(() => null);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'addCollection',

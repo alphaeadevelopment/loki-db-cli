@@ -1,8 +1,7 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import merge from 'lodash/merge';
 import { collectionName } from './common-options';
-import { loadCollection } from '../utils';
-import { closeDatabase, saveDatabase } from '../utils';
+import { loadCollection, closeDatabase, saveDatabase } from '../utils';
 
 const builder = (yargs) => {
   yargs
@@ -18,28 +17,29 @@ const builder = (yargs) => {
 };
 
 const handler = ({ name, filename, query }) => {
-  const db = new loki(filename);
+  const db = new Loki(filename);
   loadCollection(db, name)
     .then((collection) => {
       let dbQuery;
       try {
         dbQuery = JSON.parse(query);
-      } catch (e) {
-        console.error('Error parsing JSON: %s', query);
+      }
+      catch (e) {
+        console.error('Error parsing JSON: %s', query); // eslint-disable-line no-console
         process.exit(1);
       }
       collection.findAndRemove(dbQuery);
       saveDatabase(db)
         .then(() => {
           closeDatabase(db)
-            .then(() => null)
+            .then(() => null);
         });
     })
-    .catch(err => {
-      console.error(err);
+    .catch((err) => {
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'findAndRemove',

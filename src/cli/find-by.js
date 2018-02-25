@@ -1,8 +1,7 @@
-import loki from 'lokijs';
+import Loki from 'lokijs';
 import merge from 'lodash/merge';
 import { collectionName } from './common-options';
-import { loadCollection } from '../utils';
-import { closeDatabase } from '../utils';
+import { loadCollection, closeDatabase } from '../utils';
 
 const builder = (yargs) => {
   yargs
@@ -24,7 +23,7 @@ const builder = (yargs) => {
 };
 
 const handler = ({ name, filename, field, value }) => {
-  const db = new loki(filename);
+  const db = new Loki(filename);
   loadCollection(db, name)
     .then((collection) => {
       const data = collection.by(field, value);
@@ -32,11 +31,11 @@ const handler = ({ name, filename, field, value }) => {
       closeDatabase(db)
         .then(() => null);
     })
-    .catch(err => {
-      console.error(err);
+    .catch((err) => {
+      console.error(err); // eslint-disable-line no-console
       process.exit(1);
-    })
-}
+    });
+};
 
 export default ({
   command: 'findBy',
