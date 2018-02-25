@@ -1,6 +1,6 @@
 {
   "name": "loki-db-cli",
-  "version": "1.0.3",
+  "version": "1.0.0",
   "description": "Node command line interface (CLI) for lokijs javascript database",
   "main": "index.js",
   "scripts": {
