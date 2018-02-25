@@ -1,0 +1,48 @@
+{
+  "name": "@alphaeadev/loki-db-cli",
+  "version": "1.0.3",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm run test:ci -- --watch",
+    "test:ci": "mocha-webpack --webpack-config webpack.config.js --require mocha.setup.js --glob \"*.spec.js*\" --reporter mochawesome --reporter-options reportDir=mochawesome-report-unit --recursive src",
+    "deploy": "npm version patch && npm run redeploy",
+    "redeploy": "npm run build && npm publish",
+    "build": "NODE_ENV=production webpack"
+  },
+  "bin": "index.js",
+  "keywords": [],
+  "author": "Graham King <gking2224@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-minify": "^0.2.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "chai": "^4.1.2",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "mocha": "^5.0.0",
+    "mocha-webpack": "^1.0.1",
+    "mochawesome": "^3.0.2",
+    "sinon": "^4.2.2",
+    "sinon-chai": "^2.14.0",
+    "webpack": "^3.10.0"
+  },
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "lodash": "^4.17.5",
+    "lokijs": "^1.5.3",
+    "yargs": "^11.0.0"
+  },
+  "peerDependencies": {
+    "lokijs": "^1.5.2",
+    "uuid": "^3.2.1"
+  },
+  "publishConfig": {
+    "registry": "http://proliant:8081/repository/npm-releases/"
+  }
+}
