@@ -49,8 +49,5 @@
   "peerDependencies": {
     "lokijs": "^1.5.2"
   },
-  "repository": "https://github.com/alphaeadevelopment/loki-db-cli.git",
-  "publishConfig": {
-    "registry": "http://proliant:8081/repository/npm-releases/"
-  }
+  "repository": "https://github.com/alphaeadevelopment/loki-db-cli.git"
 }
