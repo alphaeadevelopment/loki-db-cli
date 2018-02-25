@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run test:ci -- --watch",
     "test:ci": "mocha-webpack --webpack-config webpack.config.js --require mocha.setup.js --glob \"*.spec.js*\" --reporter mochawesome --reporter-options reportDir=mochawesome-report-unit --recursive src",
-    "deploy": "npm version patch && npm run redeploy",
+    "deploy": "npm version patch && git push && git push --tags && npm run redeploy",
     "redeploy": "npm run build && npm publish",
     "build": "NODE_ENV=production webpack"
   },
